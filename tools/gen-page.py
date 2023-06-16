@@ -112,7 +112,7 @@ def gen_page(dirs):
         '<html lang="en">\n'
         '<head>\n'
         '<meta charset="utf-8">\n'
-        '<meta name="viewport" content="width=device-width,initial-scale=1">\n'
+        '<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=no">\n'
         '<title>Zhulien Zhelezchev</title>\n'
         '<meta name="description" content="Zhulien Zhelezchev">\n'
         '<!-- Recommended minimum -->\n'
