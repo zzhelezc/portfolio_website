@@ -168,7 +168,8 @@ article time {
     transition-delay: 0ms;
 }
 
-.carousel-button {
+.carousel-button, .carousel-button:hover,
+.carousel-button:active, .carousel-button:focus {
     position: absolute;
     top: 0;
     color: rgba(255, 255, 255, .5);
@@ -176,6 +177,7 @@ article time {
     height: 100%;
     width: 50%;
     opacity: 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .carousel-button.prev {
