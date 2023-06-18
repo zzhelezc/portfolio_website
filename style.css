@@ -10,14 +10,6 @@
     /* --logoColour: #90b1aa; */
   }
 
-@media (prefers-color-scheme: dark) {
-  * {
-    --textcolor: #dadada;
-    --bgcolor: #141414;
-    --highlight: #ffc400;
-  }
-}
-
 @font-face {
     font-family: 'JosefinSans';
     src: url('fonts/Josefin_Sans/JosefinSans-VariableFont_wght.ttf') format('truetype');
@@ -415,9 +407,16 @@ a[href$=".png"]:before { content: "IMG"; }
 
 @media only screen and (max-width: 700px) and (orientation: portrait) {
 
+    .carousel {
+        width: 100%;
+        height: 60%;
+        position: relative;
+    }
+
     body {
         margin-left: 5vw;
         margin-bottom: 10vh;
+        padding-left: 1vw;
     }
 
     .sidebarContainer {
