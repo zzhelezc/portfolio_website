@@ -13,7 +13,7 @@ def gen_section_html(title, group_id, images):
     for n, i in enumerate(images):
         item = (
             f'<li class="slide"{" data-active" if n == 0 else ""}>\n' 
-            f'<img src="{i}">\n'
+            f'<img src="{i}" loading="lazy" \>\n'
             '</li>\n'
         )
         images_body += item 
