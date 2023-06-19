@@ -11,7 +11,7 @@ def gen_section_html(title, group_id, images):
     
     for n, i in enumerate(images):
         item = (
-            f'<div class="swiper-slide" data-history="{n+1}">\n' 
+            f'<div class="swiper-slide" >\n' 
             f'<img src="{i}" loading="lazy" \>\n'
             '<div class="swiper-lazy-preloader"></div>\n'
             '</div>\n'
