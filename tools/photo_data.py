@@ -14,7 +14,7 @@ def DSCF(images):
 photos = OrderedDict({
 
 
-    'Home':
+    'index':
     DSCF(['5024', '5026', '5025', '5022', '5021']),
 
     'Morocco':

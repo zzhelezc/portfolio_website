@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=0">
 <title>Zhulien Zhelezchev</title>
 <meta name="description" content="Zhulien Zhelezchev">
 <!-- Recommended minimum -->
@@ -10,7 +10,7 @@
 <meta property="og:description" content="Zhulien Zhelezchev">
 <!-- <meta property="og:image" content="img/site-image.jpg"> -->
 <link rel="stylesheet" href="style.css">
-<script src="script.js" defer></script>
+<link rel="stylesheet" href="swiper.css" />
 </head>
 <header>
 <a href="#home">Zhulien Zhelezchev</a>
@@ -22,289 +22,44 @@
 <nav id="navigation">
 <ul>
 <li class="logo" id="navItem">
-<h1><a href="#home">Zhulien Zhelezchev</a></h1>
+<h1><a href="index.html">Zhulien Zhelezchev</a></h1>
 </li>
-<li id="navItem"><a href="#morocco">Morocco</a></li>
-<li id="navItem"><a href="#green_and_yellow">Green and Yellow</a></li>
-<li id="navItem"><a href="#red">Red</a></li>
-<li class="sidebarBottom" id="navItem"><a href="#about">About</a></li>
+<li id="navItem"><a href="morocco.html">Morocco</a></li>
+<li id="navItem"><a href="green_and_yellow.html">Green and Yellow</a></li>
+<li id="navItem"><a href="red.html">Red</a></li>
+<li class="sidebarBottom" id="navItem"><a href="about.html">About</a></li>
 <li id="navItem"><a href="https://www.instagram.com/wandering_nonsense/">Instagram</a></li>
 </ul>
 </nav>
 </div>
 </div>
 
-<section id="home">
+<section id="index">
 <div class="gallery">
-<div class="carousel" data-carousel>
-<ul data-slides>
-<li class="slide" data-active>
-<img src="photos/Home/DSCF5024.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Home/DSCF5026.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Home/DSCF5025.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Home/DSCF5022.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Home/DSCF5021.jpg" \>
-</li>
-
-</ul>
-<button class="carousel-button prev"
-data-carousel-button="prev" id="prev"></button>
-<button class="carousel-button next"
-data-carousel-button="next" id="next"></button>
+<div class="swiper">
+<div class="swiper-wrapper">
+<div class="swiper-slide" data-history="1">
+<img src="photos/index/DSCF5024.jpg" loading="lazy" \>
+<div class="swiper-lazy-preloader"></div>
 </div>
+<div class="swiper-slide" data-history="2">
+<img src="photos/index/DSCF5026.jpg" loading="lazy" \>
+<div class="swiper-lazy-preloader"></div>
 </div>
-</section>
-
-
-
-<section id="morocco">
-<div class="gallery">
-<div class="carousel" data-carousel>
-<ul data-slides>
-<li class="slide" data-active>
-<img src="photos/Morocco/DSCF5104-1.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF5094.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF5082.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF5059.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF5053.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF5031.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF5026.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF5025.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF5024.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF5022.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF5021.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF5009.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF4989.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF4968.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF4946.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF4943.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF4932.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF4918.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF4867.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF4865.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF4859.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF4856.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF4835.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF4801.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF4796.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Morocco/DSCF4783.jpg" \>
-</li>
-
-</ul>
-<button class="carousel-button prev"
-data-carousel-button="prev" id="prev"></button>
-<button class="carousel-button next"
-data-carousel-button="next" id="next"></button>
+<div class="swiper-slide" data-history="3">
+<img src="photos/index/DSCF5025.jpg" loading="lazy" \>
+<div class="swiper-lazy-preloader"></div>
 </div>
+<div class="swiper-slide" data-history="4">
+<img src="photos/index/DSCF5022.jpg" loading="lazy" \>
+<div class="swiper-lazy-preloader"></div>
 </div>
-</section>
-
-
-
-<section id="green_and_yellow">
-<div class="gallery">
-<div class="carousel" data-carousel>
-<ul data-slides>
-<li class="slide" data-active>
-<img src="photos/Green and Yellow/DSCF4395.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Green and Yellow/DSCF4396.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Green and Yellow/DSCF4322.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Green and Yellow/DSCF4294.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Green and Yellow/DSCF4289.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Green and Yellow/DSCF4347.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Green and Yellow/DSCF4319.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Green and Yellow/DSCF4349.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Green and Yellow/DSCF4394.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Green and Yellow/DSCF4379.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Green and Yellow/DSCF4268.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Green and Yellow/DSCF4337.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Green and Yellow/DSCF4338.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Green and Yellow/DSCF4363-1.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Green and Yellow/DSCF3800.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Green and Yellow/DSCF3805.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Green and Yellow/DSCF4011.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Green and Yellow/DSCF3962.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Green and Yellow/DSCF3947.jpg" \>
-</li>
-
-</ul>
-<button class="carousel-button prev"
-data-carousel-button="prev" id="prev"></button>
-<button class="carousel-button next"
-data-carousel-button="next" id="next"></button>
+<div class="swiper-slide" data-history="5">
+<img src="photos/index/DSCF5021.jpg" loading="lazy" \>
+<div class="swiper-lazy-preloader"></div>
 </div>
+
 </div>
-</section>
-
-
-
-<section id="red">
-<div class="gallery">
-<div class="carousel" data-carousel>
-<ul data-slides>
-<li class="slide" data-active>
-<img src="photos/Red/DSCF4332.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Red/DSCF4333.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Red/DSCF4355.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Red/DSCF4358.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Red/DSCF4366.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Red/DSCF4367.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Red/DSCF4369.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Red/DSCF4372.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Red/DSCF4317.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Red/DSCF4387.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Red/DSCF4299.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Red/DSCF4295.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Red/DSCF4298.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Red/DSCF4296.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Red/DSCF4270.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Red/DSCF4269.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Red/DSCF3973.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Red/DSCF4218.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Red/DSCF4214.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Red/DSCF4206.jpg" \>
-</li>
-<li class="slide">
-<img src="photos/Red/DSCF4188.jpg" \>
-</li>
-
-</ul>
-<button class="carousel-button prev"
-data-carousel-button="prev" id="prev"></button>
-<button class="carousel-button next"
-data-carousel-button="next" id="next"></button>
 </div>
 </div>
 </section>
@@ -312,29 +67,8 @@ data-carousel-button="next" id="next"></button>
 
 
 
-<section id="about"> <!-- ABOUT -->
-    
-    <div class="gallery">
-      <article>
-        <h2>About me</h2>
-        <p>
-          This is something about me. 
-        </p>
-
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </article>
-    </div>
-</section>
-
-
-<section id="zine">
-<div class="gallery">
-<iframe class="zine" src="https://mixam.co.uk/embed/6480ea2c70800e4918e405a2" allowtransparency="true" allowfullscreen="true" frameborder="0"></iframe>
-</div>
-</div>
-</section>
 </main>
+<script src="swiper.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

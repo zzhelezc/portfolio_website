@@ -7,27 +7,23 @@ import sys
 
 
 def gen_section_html(title, group_id, images):
-    
     images_body = ''
     
     for n, i in enumerate(images):
         item = (
-            f'<li class="slide"{" data-active" if n == 0 else ""}>\n' 
-            f'<img src="{i}" \>\n'
-            '</li>\n'
+            f'<div class="swiper-slide" data-history="{n+1}">\n' 
+            f'<img src="{i}" loading="lazy" \>\n'
+            '<div class="swiper-lazy-preloader"></div>\n'
+            '</div>\n'
         )
         images_body += item 
     
     page = (f'<section id="{group_id}">\n'
             '<div class="gallery">\n'
-            '<div class="carousel" data-carousel>\n'
-            '<ul data-slides>\n'
+            '<div class="swiper">\n'
+            '<div class="swiper-wrapper">\n'
             f'{images_body}\n'
-            '</ul>\n'
-            '<button class="carousel-button prev"\n'
-            'data-carousel-button="prev" id="prev"></button>\n'
-            '<button class="carousel-button next"\n'
-            'data-carousel-button="next" id="next"></button>\n'
+            '</div>\n'
             '</div>\n'
             '</div>\n'
             '</section>\n'
@@ -37,7 +33,7 @@ def gen_section_html(title, group_id, images):
 
 
 
-def gen_photo_section(album, group_id):
+def gen_photo_section(album):
     d = album
     items = photos[d]
 
@@ -63,6 +59,7 @@ def gen_photo_section(album, group_id):
 
     title = d.lower().replace(' ', '_').replace(':', '_')
     page = gen_section_html(d, title, images)
+    page += '\n\n\n'
 
     # with open(filename, 'w') as f:
     #     f.write(page)
@@ -72,19 +69,19 @@ def gen_photo_section(album, group_id):
 def gen_nav(titles):
     titles_html = ''
     for n, t in titles:
-        if t == "Home":
+        if t == "index":
             continue
-        titles_html += f'<li id="navItem"><a href="#{n}">{t}</a></li>\n'
+        titles_html += f'<li id="navItem"><a href="{n}.html">{t}</a></li>\n'
     
     page = ('<div class="sidebarContainer">\n'
             '<div class="sidebar">\n'
             '<nav id="navigation">\n'
             '<ul>\n'
             '<li class="logo" id="navItem">\n'
-            '<h1><a href="#home">Zhulien Zhelezchev</a></h1>\n'
+            '<h1><a href="index.html">Zhulien Zhelezchev</a></h1>\n'
             '</li>\n'
             f'{titles_html}'
-            '<li class="sidebarBottom" id="navItem"><a href="#about">About</a></li>\n'
+            '<li class="sidebarBottom" id="navItem"><a href="about.html">About</a></li>\n'
             '<li id="navItem"><a href="https://www.instagram.com/wandering_nonsense/">Instagram</a></li>\n'
             '</ul>\n'
             '</nav>\n'
@@ -94,25 +91,15 @@ def gen_nav(titles):
 
     return page
 
-def gen_page(dirs):
-    pages = ''
-    titles = []
-    
-    for i, d in enumerate(dirs):
-        print(f'generating html page for {d}...')
-        nav_title = d.lower().replace(' ', '_').replace(':', '_')
-        titles.append((nav_title, d))
-        
-        pages += gen_photo_section(d, i)
-        pages += '\n\n\n'
-
+def gen_page(d, titles):
+    filename = d.lower().replace(' ', '_').replace(':', '_') + '.html'
 
     page = (
         '<!DOCTYPE html>\n'
         '<html lang="en">\n'
         '<head>\n'
         '<meta charset="utf-8">\n'
-        '<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=no">\n'
+        '<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=0">\n'
         '<title>Zhulien Zhelezchev</title>\n'
         '<meta name="description" content="Zhulien Zhelezchev">\n'
         '<!-- Recommended minimum -->\n'
@@ -120,7 +107,7 @@ def gen_page(dirs):
         '<meta property="og:description" content="Zhulien Zhelezchev">\n'
         '<!-- <meta property="og:image" content="img/site-image.jpg"> -->\n'
         '<link rel="stylesheet" href="style.css">\n'
-        '<script src="script.js" defer></script>\n'
+        '<link rel="stylesheet" href="swiper.css" />\n'
         '</head>\n'
         '<header>\n'
         '<a href="#home">Zhulien Zhelezchev</a>\n'
@@ -128,25 +115,41 @@ def gen_page(dirs):
         '<body>\n'
         '<main>\n'
         f'{gen_nav(titles)}\n'
-        f'{pages}\n'
-        f'{load_page("about.html")}'
+        f'{gen_photo_section(d)}\n'
+        # f'{load_page("about.html")}'
         '</main>\n'
+        '<script src="swiper.js"></script>\n'
+        '<script src="script.js"></script>\n'
         '</body>\n'
         '</html>\n'
     )
 
 
-    with open("index.html", 'w') as f:
+    with open(filename, 'w') as f:
         f.write(page)
 
 def load_page(filename):
     with open(filename, 'r') as file:
         return file.read()
 
+
+def gen_pages(dirs):
+    titles = []
+    
+    for d in dirs:
+        nav_title = d.lower().replace(' ', '_').replace(':', '_')
+        titles.append((nav_title, d))
+
+    for d in dirs:
+        print(f'generating page for {d}')
+        gen_page(d, titles)
+        
+        
+
 def main():
     dirs = list(photos.keys())
     
-    gen_page(dirs)
+    gen_pages(dirs)
         
     print('done.')    
             
