@@ -110,7 +110,7 @@ def gen_page(d, titles):
         '<link rel="stylesheet" href="swiper.css" />\n'
         '</head>\n'
         '<header>\n'
-        '<a href="#home">Zhulien Zhelezchev</a>\n'
+        '<a href="index.html">Zhulien Zhelezchev</a>\n'
         '</header>\n'
         '<body>\n'
         '<main>\n'
