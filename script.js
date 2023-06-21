@@ -6,5 +6,5 @@ var swiper = new Swiper('.swiper', {
     },
     loop: true,
     effect: 'slide',
-    fadeEffect: { crossFade: true },
+    // fadeEffect: { crossFade: true },
 });

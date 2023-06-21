@@ -24,6 +24,7 @@
 <li class="logo" id="navItem">
 <h1><a href="index.html">Zhulien Zhelezchev</a></h1>
 </li>
+<li id="navItem"><a href="lost_in_time.html">Lost In Time</a></li>
 <li id="navItem"><a href="morocco.html">Morocco</a></li>
 <li id="navItem"><a href="green_and_yellow.html">Green and Yellow</a></li>
 <li id="navItem"><a href="red.html">Red</a></li>
@@ -65,6 +66,17 @@
 
 </main>
 <script src="swiper.js"></script>
-<script src="script.js"></script>
+<script>
+  var swiper = new Swiper('.swiper', {
+    lazy: true,
+    autoHeight: false,
+    keyboard: {
+        enabled: true,
+    },
+    loop: true,
+    effect: 'fade',
+    // fadeEffect: { crossFade: true },
+});
+</script>
 </body>
 </html>
