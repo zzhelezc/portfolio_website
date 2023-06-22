@@ -165,6 +165,11 @@ def gen_head():
     
 def gen_header():
     return header(a(config['title']['str'], href=config['title']['href']))
+
+def gen_goat_counter():
+    s = script(src="//gc.zgo.at/count.js", _async=True)
+    s['data-goatcounter']="https://kappa.goatcounter.com/count"
+    return s
 ####################################################################################
 # Pages 
 ####################################################################################
@@ -183,6 +188,7 @@ def gen_page(directory):
         gen_photo_section(directory)
         script(src="swiper.js")
         script(src=config['swiper_config'].get(filename, 'script.js'))
+        gen_goat_counter()
         
             
 
@@ -198,6 +204,7 @@ def gen_templated_page(template_filename, filename):
         'head':    gen_head(),
         'header':  gen_header(),
         'sidebar': gen_nav_bar(),
+        'goat_counter': gen_goat_counter()
     }
 
     with open(template_filename, 'r') as tf:
