@@ -1,42 +1,115 @@
 #!/usr/bin/env python3
 
+import os
 from photo_data import *
-import sys
+import dominate
+from dominate.tags import *
+from collections import namedtuple
+from jinja2 import Template
+
+####################################################################################
+# Global Config
+####################################################################################
+def dir_to_href(d):
+    return d.lower().replace(' ', '_').replace(':', '_') + '.html'
+
+config = {
+    'title': {
+        'str': 'Zhulien Zhelezchev',
+        'href': 'index.html'
+    },
 
 
+    'nav_append': [
+        {
+            'title': 'About',
+            'href': 'about.html',
+            'template': 'templates/about.html'
+        },
+        {
+            'title': 'Instagram',
+            'href': 'https://www.instagram.com/wandering_nonsense/'
+        }
+    ],
 
+    'unliked_templated': [
+        {
+            'template': 'templates/zine.html',
+            'filename': 'zine.html'
+        }
+    ],
 
-def gen_section_html(title, group_id, images):
-    images_body = ''
+    'dir_to_href': dir_to_href
     
-    for n, i in enumerate(images):
-        item = (
-            f'<div class="swiper-slide" >\n' 
-            f'<img src="{i}" loading="lazy" \>\n'
-            '<div class="swiper-lazy-preloader"></div>\n'
-            '</div>\n'
-        )
-        images_body += item 
-    
-    page = (f'<section id="{group_id}">\n'
-            '<div class="gallery">\n'
-            '<div class="swiper">\n'
-            '<div class="swiper-wrapper">\n'
-            f'{images_body}\n'
-            '</div>\n'
-            '</div>\n'
-            '</div>\n'
-            '</section>\n'
-            )
+}
 
-    return page
+
+
+####################################################################################
+# Nav bar
+####################################################################################
+
+def gen_nav_bar():
+     dirs = list(photos.keys())
+
+     titles = []
+     for d in dirs:
+        nav_href = config['dir_to_href'](d)
+        titles.append((nav_href, d))
+
+     return gen_nav(titles)   
+
+def gen_nav(titles):
+    sidebar_container = div(cls='sidebarContainer')
+    sidebar = div(cls='sidebar')
+    navigation = nav(id='navigation')
+        
+    items = ul()
+                
+    items += li(h1(a(config['title']['str'],
+                     href=config['title']['href'])),
+                cls='logo', id='navItem')
+
+    for nav_href, page_title in titles:
+        if page_title == 'index':
+            continue
+                        
+        items += li(a(page_title, href=nav_href),
+                       id='navItem')
+
+    if config['nav_append']:
+        for n, item in enumerate(config['nav_append']):
+        
+            items += li(a(item['title'], href=item['href']),
+                       cls='sidebarBottom' if n == 0 else '',
+                       id='navItem')
+
+    navigation.add(items)
+    sidebar.add(navigation)
+    sidebar_container.add(sidebar)
+           
+    return sidebar_container 
+
+####################################################################################
+# Photo Gallery
+####################################################################################
+
+def gen_section_html(images):
+    with div(cls='gallery') as gallery:
+        with div(cls='swiper'):
+            with div(cls='swiper-wrapper'):
+                for n, i in enumerate(images):
+                    with div(cls='swiper-slide'):
+                        img(src=f'{i}', loading='lazy')
+                        div(cls='swiper-lazy-preloader')
+                
+        return gallery
 
 
 
 def gen_photo_section(album):
     d = album
     items = photos[d]
-
     images = []
 
     for i in items:
@@ -57,102 +130,98 @@ def gen_photo_section(album):
              images.append(f'photos/{d}/{i}')
              
 
-    title = d.lower().replace(' ', '_').replace(':', '_')
-    page = gen_section_html(d, title, images)
-    page += '\n\n\n'
+    page = gen_section_html(images)
 
-    # with open(filename, 'w') as f:
-    #     f.write(page)
     return page
 
+####################################################################################
+# Misc
+####################################################################################
+def gen_head_contents():
+        title(config['title']['str'])
+        meta(charset='utf-8')
+        meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0")
+        meta(name='description', content=f"{config['title']['str']}'s photography")
+        meta(property='og:title', content=config['title']['str'])
+        meta(property='og:description', content=f"{config['title']['str']}'s photography")
 
-def gen_nav(titles):
-    titles_html = ''
-    for n, t in titles:
-        if t == "index":
-            continue
-        titles_html += f'<li id="navItem"><a href="{n}.html">{t}</a></li>\n'
+        link(rel="stylesheet", href="style.css")
+        link(rel="stylesheet", href="swiper.css")
+
+def gen_head():
+    with head() as h:
+        gen_head_contents()
+        return h
     
-    page = ('<div class="sidebarContainer">\n'
-            '<div class="sidebar">\n'
-            '<nav id="navigation">\n'
-            '<ul>\n'
-            '<li class="logo" id="navItem">\n'
-            '<h1><a href="index.html">Zhulien Zhelezchev</a></h1>\n'
-            '</li>\n'
-            f'{titles_html}'
-            '<li class="sidebarBottom" id="navItem"><a href="about.html">About</a></li>\n'
-            '<li id="navItem"><a href="https://www.instagram.com/wandering_nonsense/">Instagram</a></li>\n'
-            '</ul>\n'
-            '</nav>\n'
-            '</div>\n'
-            '</div>\n'
-            )
+def gen_header():
+    return header(a(config['title']['str'], href=config['title']['href']))
+####################################################################################
+# Pages 
+####################################################################################
 
-    return page
+def gen_page(directory):
+    filename = config['dir_to_href'](directory)
 
-def gen_page(d, titles):
-    filename = d.lower().replace(' ', '_').replace(':', '_') + '.html'
+    doc = dominate.document(title=None)
 
-    page = (
-        '<!DOCTYPE html>\n'
-        '<html lang="en">\n'
-        '<head>\n'
-        '<meta charset="utf-8">\n'
-        '<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=0">\n'
-        '<title>Zhulien Zhelezchev</title>\n'
-        '<meta name="description" content="Zhulien Zhelezchev">\n'
-        '<!-- Recommended minimum -->\n'
-        '<meta property="og:title" content="Zhulien Zhelezchev">\n'
-        '<meta property="og:description" content="Zhulien Zhelezchev">\n'
-        '<!-- <meta property="og:image" content="img/site-image.jpg"> -->\n'
-        '<link rel="stylesheet" href="style.css">\n'
-        '<link rel="stylesheet" href="swiper.css" />\n'
-        '</head>\n'
-        '<header>\n'
-        '<a href="index.html">Zhulien Zhelezchev</a>\n'
-        '</header>\n'
-        '<body>\n'
-        '<main>\n'
-        f'{gen_nav(titles)}\n'
-        f'{gen_photo_section(d)}\n'
-        # f'{load_page("about.html")}'
-        '</main>\n'
-        '<script src="swiper.js"></script>\n'
-        '<script src="script.js"></script>\n'
-        '</body>\n'
-        '</html>\n'
-    )
+    with doc.head:
+        gen_head_contents()
 
+    with doc:
+        gen_header()
+        gen_nav_bar()
+        gen_photo_section(directory)
+        script(src="swiper.js")
+        script(src="script.js")
 
+    dir = os.path.dirname(filename)
+    if dir is not '':
+        os.makedirs(dir, exist_ok=True)
+        
     with open(filename, 'w') as f:
-        f.write(page)
+        f.write(str(doc))
 
-def load_page(filename):
-    with open(filename, 'r') as file:
-        return file.read()
+def gen_templated_page(template_filename, filename):
+    data = {
+        'head':    gen_head(),
+        'header':  gen_header(),
+        'sidebar': gen_nav_bar(),
+    }
 
-
-def gen_pages(dirs):
-    titles = []
-    
-    for d in dirs:
-        nav_title = d.lower().replace(' ', '_').replace(':', '_')
-        titles.append((nav_title, d))
-
-    for d in dirs:
-        print(f'generating page for {d}')
-        gen_page(d, titles)
+    with open(template_filename, 'r') as tf:
+        template = Template(tf.read())
         
-        
-
-def main():
-    dirs = list(photos.keys())
-    
-    gen_pages(dirs)
-        
-    print('done.')    
+        dir = os.path.dirname(filename)
+        if dir is not '':
+            os.makedirs(dir, exist_ok=True)
             
+        with open(filename, 'w') as f:
+            f.write(template.render(data))
+
+
+def gen_templated_pages():
+    print('  linked')
+    for i in config['nav_append']:
+        template = i.get('template', False)
+        if template:
+            print(f"    - {i['href']} from {template}")
+            gen_templated_page(template, i['href'])
+
+    print('  unlinked')
+    for i in config['unliked_templated']:
+        print(f"    - {i['filename']} from {i['template']}")
+        gen_templated_page(i['template'], i['filename'])
+        
+            
+def main():
+    for d in list(photos.keys()):
+        print(f'generating page for {d}')
+        gen_page(d)
+    print('done.')    
+
+    print('generating templated pages...')
+    gen_templated_pages()
+    print('done.')
         
 
 if __name__ == '__main__':
