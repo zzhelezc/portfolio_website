@@ -39,7 +39,12 @@ config = {
         }
     ],
 
-    'dir_to_href': dir_to_href
+    'dir_to_href': dir_to_href,
+
+    'swiper_config': {
+        'index.html': 'swiper-fade.js',
+        'lost_in_time.html': 'swiper-fade.js'
+    }
     
 }
 
@@ -172,10 +177,12 @@ def gen_page(directory):
         gen_nav_bar()
         gen_photo_section(directory)
         script(src="swiper.js")
-        script(src="script.js")
+        script(src=config['swiper_config'].get(filename, 'script.js'))
+        
+            
 
     dir = os.path.dirname(filename)
-    if dir is not '':
+    if dir !='':
         os.makedirs(dir, exist_ok=True)
         
     with open(filename, 'w') as f:
@@ -192,7 +199,7 @@ def gen_templated_page(template_filename, filename):
         template = Template(tf.read())
         
         dir = os.path.dirname(filename)
-        if dir is not '':
+        if dir != '':
             os.makedirs(dir, exist_ok=True)
             
         with open(filename, 'w') as f:
