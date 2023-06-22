@@ -27,6 +27,11 @@ config = {
             'template': 'templates/about.html'
         },
         {
+            'title': 'Zine',
+            'href': 'zine.html',
+            'template': 'templates/zine-etsy.html'
+        },
+        {
             'title': 'Instagram',
             'href': 'https://www.instagram.com/wandering_nonsense/'
         }
@@ -35,7 +40,7 @@ config = {
     'unliked_templated': [
         {
             'template': 'templates/zine.html',
-            'filename': 'zine.html'
+            'filename': 'zine-flipbook.html'
         }
     ],
 
