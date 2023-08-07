@@ -6,6 +6,11 @@ import dominate
 from dominate.tags import *
 from collections import namedtuple
 from jinja2 import Template
+import json
+
+PATH = os.environ['WEBSITE_ROOT']
+RELATIVE_PATH = '/photos'
+PHOTO_PATH = PATH + RELATIVE_PATH
 
 ####################################################################################
 # Global Config
@@ -31,10 +36,6 @@ config = {
             'href': 'zine.html',
             'template': 'templates/zine-etsy.html'
         },
-        {
-            'title': 'Instagram',
-            'href': 'https://www.instagram.com/wandering_nonsense/'
-        }
     ],
 
     'unliked_templated': [
@@ -60,12 +61,15 @@ config = {
 ####################################################################################
 
 def gen_nav_bar():
-     dirs = list(photos.keys())
+     dirs = list_photo_directories()
 
      titles = []
      for d in dirs:
-        nav_href = config['dir_to_href'](d)
-        titles.append((nav_href, d))
+        cfg = load_sequence_cfg(d)
+        nav_href = cfg['href']
+
+        if not cfg['unlist']:
+            titles.append((nav_href, cfg['title']))
 
      return gen_nav(titles)   
 
@@ -117,32 +121,11 @@ def gen_section_html(images):
 
 
 
-def gen_photo_section(album):
-    d = album
-    items = photos[d]
-    images = []
+def gen_photo_section(directory):
+    cfg = load_sequence_cfg(directory)
+    images = [f'photos/{directory}/{i}' for i in cfg['sequence']]
 
-    for i in items:
-        
-        if isinstance(i, tuple):
-            a = i[0]
-            b = i[1]
-
-            a1 = a.replace('.jpg', '')
-            b1 = b.replace('.jpg', '')
-            
-            cmd = f'montage "./photos/{d}/{a}" "./photos/{d}/{b}" -tile 2x1 -geometry +40+0 "./photos/{d}/{a1}-{b1}.jpg"'
-                
-            os.system(cmd)
-            images.append(f'photos/{d}/{a1}-{b1}.jpg')
-
-        else:
-             images.append(f'photos/{d}/{i}')
-             
-
-    page = gen_section_html(images)
-
-    return page
+    return gen_section_html(images)
 
 ####################################################################################
 # Misc
@@ -175,7 +158,8 @@ def gen_goat_counter():
 ####################################################################################
 
 def gen_page(directory):
-    filename = config['dir_to_href'](directory)
+    cfg = load_sequence_cfg(directory)
+    filename = cfg['href']
 
     doc = dominate.document(title=None)
 
@@ -230,10 +214,18 @@ def gen_templated_pages():
     for i in config['unliked_templated']:
         print(f"    - {i['filename']} from {i['template']}")
         gen_templated_page(i['template'], i['filename'])
-        
-            
+
+def list_photo_directories():
+    dirs = [f.name for f in os.scandir(PHOTO_PATH) if f.is_dir()]
+    return [d for d in dirs if os.path.isfile(f'{PHOTO_PATH}/{d}/sequence.json')]
+
+def load_sequence_cfg(d):
+    with open(f'{PHOTO_PATH}/{d}/sequence.json', 'r') as f:
+            return json.load(f)
+
 def main():
-    for d in list(photos.keys()):
+    photo_directories = []
+    for d in list_photo_directories():
         print(f'generating page for {d}')
         gen_page(d)
     print('done.')    
