@@ -8,6 +8,15 @@
     --highlight: black;
     /* --sidebarItemColour: #d76735; */
     /* --logoColour: #90b1aa; */
+
+    
+    --swiper-navigation-size: 0.7em;
+    --swiper-navigation-top-offset: 73.5vh;
+    --swiper-navigation-sides-offset: 0;
+    --swiper-navigation-color: black;
+
+    --swiper-pagination-color: black;
+
   }
 
 @font-face {
@@ -109,14 +118,17 @@ article time {
     width: 85vw;
     height: 100vh;
     padding-left: 5vw;
+    /* background-color: green; */
 }
 
 .swiper {
     width: 80%;
-    height: 75%;
+    height: 79%;
+    margin-top: 3.9vh;
     position: relative;
     object-fit: contain;
     background-size: contain;
+    /* background-color: red; */
 }
 
 .swiper .swiper-slide {
@@ -128,10 +140,23 @@ article time {
 
 .swiper-slide img {
     width: 100%;
-    height: 100%;
+    height: 95%;
     object-fit: contain;
     /* background-color: white; */
 }
+
+.swiper-button-prev, .swiper-button-next {
+    
+}
+
+.swiper-button-prev {
+    margin-left: 78%;
+}
+
+.swiper-button-next {
+    margin-right: 19%;
+}
+
 
 .zine {
     width: 80%;

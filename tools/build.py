@@ -110,13 +110,16 @@ def gen_nav(titles):
 
 def gen_section_html(images):
     with div(cls='gallery') as gallery:
-        with div(cls='swiper'):
+        with div(cls='swiper', navigation="true"):
             with div(cls='swiper-wrapper'):
                 for n, i in enumerate(images):
                     with div(cls='swiper-slide'):
                         img(src=f'{i}', loading='lazy')
                         div(cls='swiper-lazy-preloader')
-                
+
+            div(cls='swiper-pagination')            
+            # div(cls='swiper-button-prev')
+            # div(cls='swiper-button-next')
         return gallery
 
 
