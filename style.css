@@ -489,9 +489,7 @@ a[href$=".png"]:before { content: "IMG"; }
 
 
     .articleContainer {
-
-        background-color: red;
-        height: 65%;
+        height: 60%;
       
     }
 }
