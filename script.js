@@ -4,6 +4,12 @@ var swiper = new Swiper('.swiper', {
     keyboard: {
         enabled: true,
     },
+    pagination: {                       
+        el: '.swiper-pagination',
+        type: 'bullets',
+        dynamicBullets: true,
+        clickable: true,
+    },
     loop: true,
     effect: 'slide',
     // fadeEffect: { crossFade: true },

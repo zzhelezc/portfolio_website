@@ -118,6 +118,7 @@ article time {
     width: 85vw;
     height: 100vh;
     padding-left: 5vw;
+    flex-direction: column;
     /* background-color: green; */
 }
 
@@ -159,8 +160,8 @@ article time {
 
 
 .zine {
-    width: 80%;
-    height: 75%;
+    width: 80vw;
+    height: 75vh;
 }
 
 
@@ -195,6 +196,10 @@ nav a:not(:last-of-type) {
 
 a {
     text-decoration: none;
+    color: black;
+}
+
+.email {
     color: #24bae3;
 }
 

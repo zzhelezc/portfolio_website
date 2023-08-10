@@ -31,11 +31,11 @@ config = {
             'href': 'about.html',
             'template': 'templates/about.html'
         },
-        {
-            'title': 'Zine',
-            'href': 'zine.html',
-            'template': 'templates/zine-etsy.html'
-        },
+        # {
+        #     'title': 'Zine',
+        #     'href': 'zine.html',
+        #     'template': 'templates/zine-etsy.html'
+        # },
     ],
 
     'unliked_templated': [
@@ -108,8 +108,13 @@ def gen_nav(titles):
 # Photo Gallery
 ####################################################################################
 
-def gen_section_html(images):
+def gen_section_html(images, cfg):
     with div(cls='gallery') as gallery:
+        if 'header' in cfg:
+            gallery.add(h2(a(cfg['header']['content'],
+                             href=cfg['header']['href'],
+                             )))
+            
         with div(cls='swiper', navigation="true"):
             with div(cls='swiper-wrapper'):
                 for n, i in enumerate(images):
@@ -128,7 +133,7 @@ def gen_photo_section(directory):
     cfg = load_sequence_cfg(directory)
     images = [f'photos/{directory}/{i}' for i in cfg['sequence']]
 
-    return gen_section_html(images)
+    return gen_section_html(images, cfg)
 
 ####################################################################################
 # Misc
