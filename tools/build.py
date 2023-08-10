@@ -29,7 +29,8 @@ config = {
         {
             'title': 'About',
             'href': 'about.html',
-            'template': 'templates/about.html'
+            'template': 'templates/about.html',
+            'nav_btm': False
         },
         # {
         #     'title': 'Zine',
@@ -49,7 +50,6 @@ config = {
 
     'swiper_config': {
         'index.html': 'swiper-fade.js',
-        'lost_in_time.html': 'swiper-fade.js'
     }
     
 }
@@ -93,10 +93,12 @@ def gen_nav(titles):
 
     if config['nav_append']:
         for n, item in enumerate(config['nav_append']):
-        
             items += li(a(item['title'], href=item['href']),
-                       cls='sidebarBottom' if n == 0 else '',
-                       id='navItem')
+                        cls='sidebarBottom' if item['nav_btm'] else '',
+                        id='navItem')
+             
+
+            
 
     navigation.add(items)
     sidebar.add(navigation)
