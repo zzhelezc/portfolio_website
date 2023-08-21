@@ -2,6 +2,7 @@
     "title": "Home",
     "href": "index.html",
     "unlist": true,
+    "swiper_config": "swiper-fade.js",
     "sequence": [
         "DSCF4431.jpg",
         "DSCF4704.jpg",

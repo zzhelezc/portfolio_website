@@ -107,6 +107,7 @@ article time {
 
 .sidebarBottom {
     margin-top: 3vh;
+    /* text-decoration: underline; */
 }
 
 /* ----------------- Image Gallery ----------------- */
@@ -203,6 +204,14 @@ a {
     color: #24bae3;
 }
 
+.weeklyProj {
+    text-decoration: underline;
+}
+
+.navI {
+    /* text-decoration: underline; */
+}
+
 a:hover {
     border-bottom: 1px solid;
 }
@@ -235,8 +244,8 @@ ul li::marker {
 }
 
 li {
-    /* margin-bottom: .2em; */
-    margin-bottom: -.1em;
+    margin-bottom: .2em;
+    /* margin-bottom: -.1em; */
 }
 
 ul, ol {
@@ -457,7 +466,7 @@ a[href$=".png"]:before { content: "IMG"; }
 
     .logo {
         margin-top: 0vh;
-        display: None
+        display: None;        
     }
     
     .sidebar a {
